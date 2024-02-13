@@ -1,12 +1,32 @@
-
-/* 
-
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
-
-*/
+/* Basic styling for the To-Do List */
+body {
+    font-family: sans-serif;
+    text-align: center; /* Centra el texto en la página */
+  }
+  
+  .container {
+    margin: 0 auto;
+    width: 50%; /* Ajusta el ancho según tus necesidades */
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  button {
+    background-color: #ccc;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
