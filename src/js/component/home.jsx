@@ -32,7 +32,7 @@ const home = () => {
         {todos.map((todo, index) => (
           <li key={index}>
             {todo}
-            <button onClick={() => handleDelete(index)}>Delete</button>
+            <button class="delete-button" onClick={() => handleDelete(index)}><i class="fa-solid fa-trash"></i></button>
           </li>
         ))}
       </ul>
