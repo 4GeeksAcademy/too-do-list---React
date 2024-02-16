@@ -36,6 +36,9 @@ const home = () => {
           </li>
         ))}
       </ul>
+      <div className='Counter'>
+        {todos.length === 0 ? (<p>No Duty</p>) : (`${todos.length} duty to do!`)}
+      </div>
     </div>
   );
 };
