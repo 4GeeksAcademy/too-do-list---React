@@ -3,14 +3,15 @@ import React, { useState, useEffect } from 'react';
 const Home = () => {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState('');
-
+  //POST
+  const urlTodos = "https://playground.4geeks.com/apis/fake/todos/user/josereimondez29";
   useEffect(() => {
-    const urlTodos = "https://playground.4geeks.com/apis/fake/todos/user/josereimondez29";
     
-    fetch(urlTodos)
+    
+    fetch(urlTodos, )
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Network Error');
         }
         return response.json();
       })
@@ -18,25 +19,48 @@ const Home = () => {
         setTodos(data);
       })
       .catch((error) => {
-        console.error('There was a problem with the fetch operation:', error);
+        return error
       });
-  }, []);
-
-  const addTodo = () => {
-    if (inputValue) {
+  }, [todos]);
+  //PUT
+  function addTodo  ()  {
+    
       const newTodo = {
         label: inputValue,
         done: false
       };
       setTodos([...todos, newTodo]);
-      setInputValue('');
-    }
+      fetch(urlTodos, {
+        method: "PUT",
+        body: JSON.stringify([...todos, newTodo]),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((response) => { return response.json() })
+			.then((data) => { console.log(data) })
+			.catch((err) => { err })
+      
   };
+
+ 
 
   const handleDelete = (index) => {
     const newTodos = [...todos];
     newTodos.splice(index, 1);
-    setTodos(newTodos);
+    
+    
+    fetch(urlTodos, {
+      method: "PUT",
+      body: JSON.stringify(newTodos),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => { return response.json() })
+    .then((data) => { console.log(data) 
+      setTodos(newTodos) })
+    .catch((err) => { err })
   };
 
   return (
@@ -46,7 +70,7 @@ const Home = () => {
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        onKeyPress={(e) => (e.key === 'Enter' ? addTodo() : null)}
+        onKeyDown={(e) => (e.key === 'Enter' ? addTodo() : null)}
         placeholder="Add a new task..."
       />
       <button onClick={addTodo}>Add</button>
